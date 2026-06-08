@@ -1,0 +1,33 @@
+{
+  "name": "kuai-cloud-auto",
+  "version": "1.0.0",
+  "description": "订货系统自动化测试项目",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:order": "playwright test testcases/order",
+    "test:customer": "playwright test testcases/customer",
+    "test:goods": "playwright test testcases/goods",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "report": "npx playwright show-report reports/html-report",
+    "allure:generate": "allure generate reports/allure-results -o reports/allure-report --clean",
+    "allure:open": "allure open reports/allure-report",
+    "allure:serve": "allure serve reports/allure-results",
+    "allure-run":"npx playwright test --project=chromium --reporter=allure-playwright",
+    "allure-open":"npx allure serve allure-results"
+  },
+  "keywords": [
+    "playwright",
+    "automation",
+    "testing",
+    "订货系统"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "allure": "^3.9.0",
+    "allure-playwright": "^3.9.0"
+  }
+}
