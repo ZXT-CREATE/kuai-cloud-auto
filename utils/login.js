@@ -30,8 +30,8 @@ async function login(page, username = config.auth.username, password = config.au
     // 点击登录按钮
     await page.click(config.selectors.login.loginButton);
     
-    // 等待登录成功，跳转到首页
-    await page.waitForURL(config.env.baseUrl + config.paths.home, { timeout: config.env.timeout });
+    // 等待登录成功，跳转到首页（使用更灵活的等待方式）
+    await page.waitForNavigation({ waitUntil: 'networkidle', timeout: config.env.timeout });
     
     console.log('登录成功');
     
