@@ -6,7 +6,7 @@
 module.exports = {
   // 环境配置
   env: {
-    baseUrl: 'https://dev.kshop.cc',
+    baseUrl: 'https://dms11.kshop.cc/',
     timeout: 30000,
     actionTimeout: 10000,
   },

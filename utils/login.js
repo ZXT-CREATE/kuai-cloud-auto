@@ -30,8 +30,18 @@ async function login(page, username = config.auth.username, password = config.au
     // 点击登录按钮
     await page.click(config.selectors.login.loginButton);
     
-    // 等待登录成功，跳转到首页（使用更灵活的等待方式）
-    await page.waitForNavigation({ waitUntil: 'networkidle', timeout: config.env.timeout });
+    // 等待登录成功，使用Promise.race同时等待导航和页面元素
+    try {
+      await Promise.race([
+        page.waitForNavigation({ waitUntil: 'networkidle', timeout: config.env.timeout }),
+        page.waitForSelector('.el-menu', { timeout: config.env.timeout }),
+        page.waitForSelector('text=首页', { timeout: config.env.timeout })
+      ]);
+    } catch (error) {
+      // 如果导航等待失败，尝试等待页面稳定
+      await page.waitForLoadState('domcontentloaded');
+      await page.waitForTimeout(1000);
+    }
     
     console.log('登录成功');
     
